@@ -1,7 +1,11 @@
+
+
+
 var modal = document.getElementById("myModal");
 var closeButton = document.getElementsByClassName("close")[0];
 var decisionBased = false;
 var playing = true;
+var MoveCounter = 0
 
 document
   .getElementById("play_again")
@@ -9,7 +13,7 @@ document
 
 modalWin = function () {
   modal.style.display = "block";
-  document.querySelector(".gamehead").textContent = "Congrats! You Win";
+  document.querySelector("#win").hidden = false;
 };
 
 closeButton.onclick = function () {
@@ -27,6 +31,7 @@ window.addEventListener("keydown", doKeyDown, true);
 
 function doKeyDown(evt) {
   var handled = false;
+  shakeMaze();
   if (playing) {
     switch (evt.keyCode) {
       case 38 /* Up arrow was pressed */:
@@ -249,6 +254,12 @@ var maze = function (X, Y) {
     this.ctx.fillStyle = "#c4192a";
     this.ctx.fillRect(scale * a, scale * b, scale, scale);
     this.Board[a][b] = "&";
+    MoveCounter++
+    if (MoveCounter >= 100) {
+
+      this.Board[2 * this.N - 1][2 * this.M] = "+";
+    }
+    document.getElementById("moveCount").innerHTML = MoveCounter
   };
 
   this.moveup = function (id) {
@@ -307,7 +318,7 @@ var maze = function (X, Y) {
     }
   };
 
-  this.delayed = function(action) {
+  this.delayed = function (action) {
     setTimeout(action, 150);
   }
 
@@ -316,7 +327,7 @@ var maze = function (X, Y) {
     i = cord[0];
     j = cord[1];
     j -= 1;
-    return this.Board[i][j] == " " ? true : false;
+    return this.Board[i][j] == " ";
   };
 
   this.moveDownPossible = function (id) {
@@ -324,7 +335,7 @@ var maze = function (X, Y) {
     i = cord[0];
     j = cord[1];
     j += 1;
-    return this.Board[i][j] == " " ? true : false;
+    return this.Board[i][j] == " ";
   };
 
   this.moveLeftPossible = function (id) {
@@ -332,7 +343,7 @@ var maze = function (X, Y) {
     i = cord[0];
     j = cord[1];
     i -= 1;
-    return this.Board[i][j] == " " ? true : false;
+    return this.Board[i][j] == " ";
   };
 
   this.moveRightPossible = function (id) {
@@ -340,14 +351,14 @@ var maze = function (X, Y) {
     i = cord[0];
     j = cord[1];
     i += 1;
-    return this.Board[i][j] == " " ? true : false;
+    return this.Board[i][j] == " ";
   };
 
   this.checker = function (id) {
     cord = this.checkPos(id);
     i = cord[0];
     j = cord[1];
-    if ((i == 2*this.N-1 && j == 2*this.M) || (i == 1 && j == 0)) {
+    if ((i == 2 * this.N - 1 && j == 2 * this.M) || (i == 1 && j == 0)) {
       modalWin();
       return 1;
     }
@@ -355,7 +366,7 @@ var maze = function (X, Y) {
   };
 };
 
-m = new maze(5, 10);
+m = new maze(10, 10);
 m.init();
 m.add_edges();
 m.gen_maze();
@@ -365,3 +376,15 @@ addEventListener("input", (event) => {
   decisionBased = event.target.value === "decision";
   m.decisionBased = decisionBased;
 });
+
+// i et sekund
+function shakeMaze() {
+  var mazeElement = document.getElementById("canvas")
+  mazeElement.classList.add("shake")
+
+  setTimeout(() => {
+    mazeElement.classList.remove("shake");
+
+  }, 500);
+
+}

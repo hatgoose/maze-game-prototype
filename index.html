@@ -1,64 +1,56 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/html">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Canvas Maze Game</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <section>
-      <div id="wrapper">
-        <div class="maze-box">
-          <div class="maze-options">
-            <h3>Game Movement Type</h3>
-            <div>
-              <input
-                type="radio"
-                name="movement-type"
-                id="unit"
-                value="unit"
-                checked
-              />
-              <label for="unit">Unit Based</label>
-            </div>
-            <div>
-              <input
-                type="radio"
-                name="movement-type"
-                id="decision"
-                value="decision"
-              />
-              <label for="decision">Decision Based</label>
-            </div>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Canvas Maze Game</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <section>
+    <div id="wrapper">
+      <div class="maze-box">
+        <div class="maze-options">
+          <h3>Game Movement Type</h3>
+          <div>
+            <input type="radio" name="movement-type" id="unit" value="unit" checked />
+            <label for="unit">Unit Based</label>
           </div>
-          <div id="maze">
-            <canvas
-              id="canvas"
-              width="523"
-              height="523"
-              style="margin-left: auto; margin-right: auto"
-            >
-              This text is displayed if your browser does not support HTML5
-              Canvas.
-            </canvas>
+          <div>
+            <input type="radio" name="movement-type" id="decision" value="decision" />
+            <label for="decision">Decision Based</label>
           </div>
+          <h3>Move Counter</h3>
+          <div id="moveCount"> 0 </div>
         </div>
-        <!-- The Modal -->
-        <div id="myModal" class="modal">
-          <div class="modal-content">
-            <div class="modal-header">
-              <span class="close">&times;</span>
-              <h2 class="gamehead"></h2>
+        <div id="maze">
+          <canvas id="canvas" width="523" height="523" style="margin-left: auto; margin-right: auto">
+            This text is displayed if your browser does not support HTML5
+            Canvas.
+          </canvas>
+        </div>
+      </div>
+      <!-- The Modal -->
+      <div id="myModal" class="modal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <span class="close">&times;</span>
+            <div class="gamehead"></div>
+            <div id="win" hidden>
             </div>
-            <div class="modal-footer">
-              <h2 id="play_again" onmouseover="" style="cursor: pointer">
-                Play Again?
-              </h2>
-            </div>
+            <img src="rickroll-roll.gif">
+          </div>
+          <div class="modal-footer">
+            <h2 id="play_again" onmouseover="" style="cursor: pointer">
+              wow?
+            </h2>
           </div>
         </div>
       </div>
-      <script type="text/javascript" src="game.js"></script>
-    </section>
-  </body>
+    </div>
+    <script type="text/javascript" src="game.js"></script>
+  </section>
+</body>
+
 </html>
